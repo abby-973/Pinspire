@@ -5,23 +5,20 @@
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css')}}" />
     </head>
-
     <body>
         <div class="navbar">
             <a href="{{ url_for('home') }}" class="navbar-brand">Home</a>
             <a href="{{ url_for('register') }}" class="navbar-item">Register</a>
-            <a href="{{ url_for('users') }}" class="navbar-item">View Users</a>
+            <a href="{{ url_for('users') }}" class="navbar-item">Add Users</a>
             <a href="{{ url_for('addpin') }}" class="navbar-item">Add Pin</a>
             <a href="{{ url_for('addboard') }}" class="navbar-item">Create Board</a>
-            <a href="{{ url_for('addpinboard') }}" class="navbar-item">Add Pin to Board</a>
         </div>
-
         <div class="body-content">
             {% block content %}
             {% endblock %}
             <hr/>
             <footer>
-                <p><img src="{{ url_for('static', filename='logo.png')}}" width="35" height="20">&copy; 2023</p>
+                <p>&Pinspire</p>
             </footer>
         </div>
     </body>
