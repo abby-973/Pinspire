@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Add New Board
+{% endblock %}
+
+{% block content %}
+    <form action="{{ url_for('addboard') }}" method="POST">
+        <h3>Please Create a New Board:</h3>
+        Cover Image URL<br>
+        <input type="text" name="cover_image" required /><br>
+        Title<br>
+        <input type="text" name="title" required /><br>
+        <input type="submit" value="Submit" /><br>
+    </form>
+{% endblock %}

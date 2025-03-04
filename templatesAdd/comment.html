@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Add Comment
+{% endblock %}
+
+{% block content %}
+    <form action="{{ url_for('addcomment') }}" method="POST">
+        <h3>Please Add a Comment:</h3>
+        Comment Text<br>
+        <textarea name="text" required></textarea><br>
+        Pin ID<br>
+        <input type="text" name="pin_id" required /><br>
+        User ID<br>
+        <input type="text" name="user_id" required /><br>
+        <input type="submit" value="Submit" /><br>
+    </form>
+{% endblock %}

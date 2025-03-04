@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Add New User
+{% endblock %}
+
+{% block content %}
+    <form action="{{ url_for('adduser') }}" method="POST">
+        <h3>Please Add the New User Information:</h3>
+        First Name<br>
+        <input type="text" name="firstname" required /><br>
+        Last Name<br>
+        <input type="text" name="lastname" required /><br>
+        Email<br>
+        <input type="email" name="email" required /><br>
+        Username<br>
+        <input type="text" name="username" required /><br>
+        <input type="submit" value="Submit" /><br>
+    </form>
+{% endblock %}
