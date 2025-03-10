@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import sqlite3
 import os
+import urllib.parse
 
 app = Flask(__name__, template_folder='templates')
 
@@ -127,21 +128,66 @@ def addboard():
 def insertboard():
     if request.method == 'POST':
         try:
-            cover_image = request.form['cover_image']
+            image = urllib.parse.quote(request.form['cover_image'])
             title = request.form['title']
 
             with sqlite3.connect('database.db') as con:
                 cur = con.cursor()
                 cur.execute("INSERT INTO board (cover_image, title) VALUES (?, ?)",
-                            (cover_image, title))
+                            (image, title))
                 con.commit()
-                msg = "Board successfully created"
+                msg = "Board successfully added"
         except:
             con.rollback()
-            msg = "Error in creating board"
+            msg = "Error in adding Board"
         finally:
             con.close()
             return render_template('result.html', msg=msg)
+
+        
+# Route to add a comment
+@app.route("/addcomment", methods=['POST'])
+def addcomment():
+    if request.method == 'POST':
+        try:
+            user_id = request.form['user_id']
+            pin_id = request.form['pin_id']
+            comment_text = request.form['comment_text']
+
+            with sqlite3.connect('database.db') as con:
+                cur = con.cursor()
+                cur.execute("INSERT INTO comments (user_id, pin_id, comment_text) VALUES (?, ?, ?)",
+                            (user_id, pin_id, comment_text))
+                con.commit()
+                msg = "Comment successfully added"
+        except:
+            con.rollback()
+            msg = "Error in adding comment"
+        finally:
+            con.close()
+            return render_template('result.html', msg=msg)
+
+# Route to associate a pin with a board
+@app.route("/addboardpin", methods=['POST'])
+def addboardpin():
+    if request.method == 'POST':
+        try:
+            board_id = request.form['board_id']
+            pin_id = request.form['pin_id']
+
+            with sqlite3.connect('database.db') as con:
+                cur = con.cursor()
+                cur.execute("INSERT INTO boardpins (board_id, pin_id) VALUES (?, ?)",
+                            (board_id, pin_id))
+                con.commit()
+                msg = "Pin successfully added to board"
+        except:
+            con.rollback()
+            msg = "Error in adding pin to board"
+        finally:
+            con.close()
+            return render_template('result.html', msg=msg)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
