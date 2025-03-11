@@ -1,3 +1,4 @@
+# Authors: Abby, Eion, and Brady
 from flask import Flask, render_template, request, jsonify
 import sqlite3
 import os
@@ -49,17 +50,17 @@ if not os.path.exists(home_template_path):
 <h1>Welcome to Pinspire add to db!</h1>
 {% endblock %}""")
 
-# Home Page route
+# Home Page 
 @app.route("/")
 def home():
     return render_template("home.html")
 
-# Route to register a new user
+#  register a new user
 @app.route("/register")
 def register():
     return render_template("register.html")
 
-# Route to add a new user to the database
+# add a new user to the database
 @app.route("/adduser", methods=['POST'])
 def adduser():
     if request.method == 'POST':
@@ -82,7 +83,7 @@ def adduser():
             con.close()
             return render_template('result.html', msg=msg)
 
-# Route to display all users
+# display all users
 @app.route('/users')
 def users():
     con = sqlite3.connect("database.db")
@@ -93,7 +94,7 @@ def users():
     con.close()
     return render_template("users.html", rows=rows)
 
-# Route to add a new pin
+# Add a new pin
 @app.route("/addpin")
 def addpin():
     return render_template("addpin.html")
@@ -119,7 +120,7 @@ def insertpin():
             con.close()
             return render_template('result.html', msg=msg)
 
-# Route to create a board
+# Create a board
 @app.route("/addboard")
 def addboard():
     return render_template("addboard.html")
@@ -145,7 +146,7 @@ def insertboard():
             return render_template('result.html', msg=msg)
 
         
-# Route to add a comment
+# Add a comment
 @app.route("/addcomment", methods=['POST'])
 def addcomment():
     if request.method == 'POST':
@@ -188,7 +189,7 @@ def addboardpin():
             con.close()
             return render_template('result.html', msg=msg)
 
-# Route to get available tables
+# Get available tables
 def get_tables():
     with sqlite3.connect('database.db') as con:
         cur = con.cursor()
@@ -200,7 +201,7 @@ def get_tables():
 def tables():
     return jsonify(get_tables())
 
-# Route to get data from a selected table
+# Get data from a selected table
 @app.route("/get_table_data", methods=['POST'])
 def get_table_data():
     table_name = request.form['table_name']
