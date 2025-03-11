@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+{% block title %}Table Selection{% endblock %}
+{% block content %}
+<h1>Select a Table</h1>
+<select id="tableSelect" class="form-control">
+    <option value="">-- Select a Table --</option>
+</select>
+
+<h2>Table Data</h2>
+<table id="dataTable" class="table table-striped">
+    <thead class="thead-dark">
+        <tr id="tableHeader"></tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Fetch table names and populate dropdown
+        $.get("/tables", function(data) {
+            data.forEach(function(table) {
+                $('#tableSelect').append(`<option value="${table}">${table}</option>`);
+            });
+        });
+
+        // Fetch table data on selection change
+        $('#tableSelect').change(function() {
+            let tableName = $(this).val();
+            if (tableName) {
+                $.post("/get_table_data", { table_name: tableName }, function(response) {
+                    let columns = response.columns;
+                    let rows = response.rows;
+
+                    // Populate table headers
+                    let headerRow = '';
+                    columns.forEach(col => headerRow += `<th>${col}</th>`);
+                    $('#tableHeader').html(headerRow);
+
+                    // Populate table body
+                    let bodyRows = '';
+                    rows.forEach(row => {
+                        let rowData = '';
+                        row.forEach(cell => rowData += `<td>${cell}</td>`);
+                        bodyRows += `<tr>${rowData}</tr>`;
+                    });
+                    $('#tableBody').html(bodyRows);
+                });
+            } else {
+                $('#tableHeader').html('');
+                $('#tableBody').html('');
+            }
+        });
+    });
+</script>
+{% endblock %}

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import sqlite3
 import os
 import urllib.parse
@@ -187,6 +187,33 @@ def addboardpin():
         finally:
             con.close()
             return render_template('result.html', msg=msg)
+
+# Route to get available tables
+def get_tables():
+    with sqlite3.connect('database.db') as con:
+        cur = con.cursor()
+        cur.execute("SELECT name FROM sqlite_master WHERE type='table'")
+        tables = [row[0] for row in cur.fetchall()]
+    return tables
+
+@app.route("/tables")
+def tables():
+    return jsonify(get_tables())
+
+# Route to get data from a selected table
+@app.route("/get_table_data", methods=['POST'])
+def get_table_data():
+    table_name = request.form['table_name']
+    with sqlite3.connect('database.db') as con:
+        cur = con.cursor()
+        cur.execute(f"SELECT * FROM {table_name} LIMIT 30")
+        rows = cur.fetchall()
+        columns = [description[0] for description in cur.description]
+    return jsonify({"columns": columns, "rows": rows})
+
+@app.route("/display_tables")
+def display_tables():
+    return render_template("display_tables.html")
 
 
 if __name__ == "__main__":
