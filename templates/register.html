@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}Register{% endblock %}
+{% block content %}
+    <h2>Register a New User</h2>
+    <form id="addUserForm" class="form">
+        <input type="text" name="firstname" placeholder="First Name" required class="input-field"/>
+        <input type="text" name="lastname" placeholder="Last Name" required class="input-field"/>
+        <input type="email" name="email" placeholder="Email" required class="input-field"/>
+        <input type="text" name="username" placeholder="Username" required class="input-field"/>
+        <button type="submit" class="btn">Register</button>
+    </form>
+{% endblock %}
