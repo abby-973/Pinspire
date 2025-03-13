@@ -1,27 +1,67 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
 .navbar {
-    background-color: lightslategray;
-    font-size: 1em;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: white;
-    padding: 8px 5px 8px 5px;
+    background: #0073e6;
+    padding: 10px;
+    text-align: center;
 }
 
 .navbar a {
+    color: white;
     text-decoration: none;
-    color: inherit;
+    padding: 10px 20px;
+    display: inline-block;
 }
 
-.navbar-brand {
-    font-size: 1.2em;
-    font-weight: 600;
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-item {
-    font-variant: small-caps;
-    margin-left: 30px;
+h1, h2 {
+    color: #333;
 }
 
-.body-content {
-    padding: 5px;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-field {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.btn {
+    background: #0073e6;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.styled-table th, .styled-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.styled-table th {
+    background: #0073e6;
+    color: white;
 }
