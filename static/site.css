@@ -1,10 +1,3 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-
 .navbar {
     background: #0073e6;
     padding: 10px;
@@ -64,4 +57,104 @@ h1, h2 {
 .styled-table th {
     background: #0073e6;
     color: white;
+}
+
+/* Basic reset and layout styling */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+}
+
+/* Container for the pin cards */
+.pins-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 20px;
+}
+
+/* Individual pin card */
+.pin-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.pin-card:hover {
+    transform: scale(1.02);
+}
+
+/* Image inside the pin */
+.pin-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Content section (title/description) */
+.pin-card .pin-content {
+    padding: 10px;
+}
+
+.pin-card h3 {
+    font-size: 1.1rem;
+    margin: 0 0 5px;
+}
+
+.pin-card p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar a {
+        display: block;
+        margin: 5px 0;
+    }
+
+    .input-field, .btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .form label {
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    .pin-card h3 {
+        font-size: 1rem;
+    }
+
+    .pin-card p {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .pin-card .pin-content {
+        padding: 6px;
+    }
+
+    .form-title {
+        font-size: 1.25rem;
+    }
+
+    .btn {
+        width: 100%;
+    }
 }
